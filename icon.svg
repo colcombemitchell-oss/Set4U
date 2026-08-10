@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">Set4U</title>
+  <defs>
+    <linearGradient id="background" x1="40" y1="24" x2="468" y2="488" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8B6CFF"/>
+      <stop offset="1" stop-color="#5034D7"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="118" fill="url(#background)"/>
+  <path d="M161 150c21-25 54-39 95-39 35 0 66 10 92 29l-39 56c-17-12-36-18-56-18-18 0-29 6-29 15 0 10 12 15 45 24 64 17 94 44 94 92 0 59-48 96-117 96-51 0-94-16-124-46l45-52c24 21 51 31 80 31 20 0 32-6 32-17 0-12-13-17-48-26-60-16-91-42-91-88 0-22 7-41 21-57Z" fill="#fff"/>
+  <circle cx="384" cy="379" r="56" fill="#FF6A86"/>
+  <path d="M375 344h24v70h-24zm-23 23h70v24h-70z" fill="#fff"/>
+</svg>

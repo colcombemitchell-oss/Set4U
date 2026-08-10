@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#6c4cf5">
+    <meta name="description" content="Build setlists, keep performance notes and run the show offline with Set4U.">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Set4U">
+    <title>Set4U – Setlist Manager</title>
+    <link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+    <link rel="manifest" href="./manifest.webmanifest">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#app">Skip to the app</a>
+
+    <header class="app-header">
+      <a class="brand" href="./" aria-label="Set4U home">
+        <img src="./icons/icon.svg" alt="" width="44" height="44">
+        <span>
+          <strong>Set4U</strong>
+          <small>Your gig, in order</small>
+        </span>
+      </a>
+
+      <div class="header-actions">
+        <span id="connection-status" class="status-pill" aria-live="polite">
+          <span class="status-dot"></span>
+          <span>Online</span>
+        </span>
+        <button id="install-button" class="button button-quiet button-compact" type="button">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 17v3h14v-3"/></svg>
+          Install
+        </button>
+        <button id="settings-button" class="icon-button" type="button" aria-label="Backup and settings">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm8 4a7.9 7.9 0 0 0-.1-1.2l2-1.6-2-3.4-2.5 1a8 8 0 0 0-2.1-1.2L15 3h-4l-.4 2.6a8 8 0 0 0-2.1 1.2l-2.5-1-2 3.4 2 1.6A8 8 0 0 0 6 12c0 .4 0 .8.1 1.2l-2 1.6 2 3.4 2.5-1a8 8 0 0 0 2.1 1.2L11 21h4l.4-2.6a8 8 0 0 0 2.1-1.2l2.5 1 2-3.4-2-1.6c.1-.4.1-.8.1-1.2Z"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <nav class="primary-nav" aria-label="Main navigation">
+      <button type="button" data-view="sets" class="nav-button is-active">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 6h13M7 12h13M7 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01"/></svg>
+        Setlists
+      </button>
+      <button type="button" data-view="songs" class="nav-button">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M9 18V5l11-2v13M9 9l11-2M6 21c2 0 3-1.1 3-2.5S8 16 6 16s-3 1.1-3 2.5S4 21 6 21Zm11-2c2 0 3-1.1 3-2.5S19 14 17 14s-3 1.1-3 2.5 1 2.5 3 2.5Z"/></svg>
+        Songs
+      </button>
+      <button type="button" data-view="live" class="nav-button">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7V5Z"/></svg>
+        Live
+      </button>
+    </nav>
+
+    <main id="app" tabindex="-1"></main>
+
+    <dialog id="song-dialog" class="dialog">
+      <form id="song-form" method="dialog">
+        <div class="dialog-heading">
+          <div>
+            <p class="eyebrow">Repertoire</p>
+            <h2 id="song-dialog-title">Add a song</h2>
+          </div>
+          <button class="icon-button" type="button" data-close-dialog="song-dialog" aria-label="Close">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg>
+          </button>
+        </div>
+
+        <input id="song-id" name="songId" type="hidden">
+        <div class="form-grid">
+          <label class="field field-wide">
+            <span>Song title</span>
+            <input id="song-title" name="title" required maxlength="120" autocomplete="off">
+          </label>
+          <label class="field field-wide">
+            <span>Artist</span>
+            <input id="song-artist" name="artist" maxlength="120" autocomplete="off">
+          </label>
+          <label class="field">
+            <span>Key</span>
+            <input id="song-key" name="key" maxlength="12" placeholder="e.g. G">
+          </label>
+          <label class="field">
+            <span>BPM</span>
+            <input id="song-bpm" name="bpm" type="number" min="1" max="400" inputmode="numeric" placeholder="e.g. 120">
+          </label>
+          <label class="field field-wide">
+            <span>Performance notes</span>
+            <textarea id="song-notes" name="notes" rows="3" placeholder="Capo, count-in, ending, who starts…"></textarea>
+          </label>
+          <label class="field field-wide">
+            <span>Lyrics or chords</span>
+            <textarea id="song-lyrics" name="lyrics" rows="9" placeholder="Add material you’re entitled to use. It stays on this device."></textarea>
+          </label>
+        </div>
+
+        <div class="dialog-actions split-actions">
+          <button id="delete-song-button" class="button button-danger is-hidden" type="button">Delete song</button>
+          <span class="action-spacer"></span>
+          <button class="button button-quiet" type="button" data-close-dialog="song-dialog">Cancel</button>
+          <button class="button button-primary" type="submit">Save song</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="set-dialog" class="dialog dialog-small">
+      <form id="set-form" method="dialog">
+        <div class="dialog-heading">
+          <div>
+            <p class="eyebrow">Setlist</p>
+            <h2 id="set-dialog-title">New set</h2>
+          </div>
+          <button class="icon-button" type="button" data-close-dialog="set-dialog" aria-label="Close">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg>
+          </button>
+        </div>
+        <input id="set-id" name="setId" type="hidden">
+        <label class="field">
+          <span>Set name</span>
+          <input id="set-name" name="name" required maxlength="80" autocomplete="off">
+        </label>
+        <div class="dialog-actions">
+          <button class="button button-quiet" type="button" data-close-dialog="set-dialog">Cancel</button>
+          <button class="button button-primary" type="submit">Save set</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="picker-dialog" class="dialog">
+      <div class="dialog-heading">
+        <div>
+          <p class="eyebrow">Add to set</p>
+          <h2 id="picker-title">Choose songs</h2>
+        </div>
+        <button class="icon-button" type="button" data-close-dialog="picker-dialog" aria-label="Close">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+      <label class="search-field">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg>
+        <span class="sr-only">Search songs</span>
+        <input id="picker-search" type="search" placeholder="Search your songs" autocomplete="off">
+      </label>
+      <div id="picker-list" class="picker-list"></div>
+      <div class="dialog-actions">
+        <button class="button button-primary" type="button" data-close-dialog="picker-dialog">Done</button>
+      </div>
+    </dialog>
+
+    <dialog id="settings-dialog" class="dialog dialog-small">
+      <div class="dialog-heading">
+        <div>
+          <p class="eyebrow">Set4U</p>
+          <h2>Backup & settings</h2>
+        </div>
+        <button class="icon-button" type="button" data-close-dialog="settings-dialog" aria-label="Close">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+      <section class="settings-section">
+        <h3>Keep a backup</h3>
+        <p>Your changes live on this device. Export a backup before changing or resetting it.</p>
+        <div class="settings-actions">
+          <button id="export-button" class="button button-primary" type="button">Export backup</button>
+          <label class="button button-quiet file-button">
+            Import backup
+            <input id="import-input" type="file" accept="application/json,.json">
+          </label>
+        </div>
+      </section>
+      <section class="settings-section">
+        <h3>Start again</h3>
+        <p>Restore Mitch’s original Set 1, Set 2 and repertoire.</p>
+        <button id="reset-button" class="button button-danger" type="button">Reset to original sets</button>
+      </section>
+      <p class="version-label">Set4U version 1.0</p>
+    </dialog>
+
+    <dialog id="install-dialog" class="dialog dialog-small">
+      <div class="dialog-heading">
+        <div>
+          <p class="eyebrow">Install Set4U</p>
+          <h2>Keep it on your home screen</h2>
+        </div>
+        <button class="icon-button" type="button" data-close-dialog="install-dialog" aria-label="Close">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+      <div class="install-instructions">
+        <p><strong>Android:</strong> open your browser menu and choose <em>Install app</em> or <em>Add to Home screen</em>.</p>
+        <p><strong>iPhone or iPad:</strong> tap Share, then choose <em>Add to Home Screen</em>.</p>
+        <p>Once opened, the app and your saved setlists work offline.</p>
+      </div>
+      <div class="dialog-actions">
+        <button class="button button-primary" type="button" data-close-dialog="install-dialog">Got it</button>
+      </div>
+    </dialog>
+
+    <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <noscript>
+      <div class="noscript-message">Set4U needs JavaScript enabled to manage your setlists.</div>
+    </noscript>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
