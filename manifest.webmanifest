@@ -7,8 +7,8 @@
   "scope": "./",
   "display": "standalone",
   "orientation": "any",
-  "background_color": "#f6f4ff",
-  "theme_color": "#6c4cf5",
+  "background_color": "#f3f0f8",
+  "theme_color": "#140d20",
   "categories": ["music", "productivity"],
   "icons": [
     {
@@ -31,3 +31,4 @@
     }
   ]
 }
+
