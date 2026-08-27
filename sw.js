@@ -1,12 +1,12 @@
-const CACHE_NAME = "set4u-v2";
+const CACHE_NAME = "set4u-v4";
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./styles.css",
-  "./app.js",
-  "./model.js",
-  "./data.js",
-  "./manifest.webmanifest",
+  "./styles.css?v=4",
+  "./app.js?v=4",
+  "./model.js?v=4",
+  "./data.js?v=4",
+  "./manifest.webmanifest?v=4",
   "./icons/icon.svg",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
@@ -63,3 +63,4 @@ self.addEventListener("fetch", (event) => {
     })
   );
 });
+
