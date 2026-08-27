@@ -1,6 +1,6 @@
 # Set4U
 
-Set4U is an installable, offline-first setlist manager made for live performance. It includes Mitch’s two current 17-song sets and a wider repertoire ready to organise.
+Set4U is an installable, offline-first setlist manager made for live performance. It includes Mitch’s current wedding running order, a dedicated spares list and a wider repertoire ready to organise.
 
 ## What it does
 
@@ -40,3 +40,4 @@ Every push to `main` runs the checks and deploys the static app with GitHub Page
 The workflow follows GitHub’s official Pages artifact deployment pattern. GitHub Pages must use **GitHub Actions** as its publishing source in the repository settings.
 
 The custom `Set4U.co.uk` address can be attached later once its DNS records are ready; a `CNAME` file is deliberately not included yet so it cannot interrupt the working GitHub Pages address.
+
