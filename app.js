@@ -6,13 +6,15 @@ import {
   deleteSet,
   deleteSong,
   duplicateSet,
+  migrateBundledSetlists,
   moveSongInSet,
   normalizeState,
   removeSongFromSet,
   renameSet,
   selectSet,
+  SCHEMA_VERSION,
   updateSong
-} from "./model.js";
+} from "./model.js?v=4";
 
 const STORAGE_KEY = "set4u-state-v1";
 
@@ -46,7 +48,18 @@ const MAX_SHEET_FILE_SIZE = 1024 * 1024;
 function loadState() {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
-    return saved ? normalizeState(JSON.parse(saved)) : createDefaultState();
+    if (!saved) return createDefaultState();
+
+    const parsed = JSON.parse(saved);
+    const normalized = normalizeState(parsed);
+    const savedVersion = Number(parsed?.version);
+    if (!Number.isFinite(savedVersion) || savedVersion < SCHEMA_VERSION) {
+      const migrated = migrateBundledSetlists(normalized);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(migrated));
+      return migrated;
+    }
+
+    return normalized;
   } catch (error) {
     console.warn("Set4U could not load the saved data.", error);
     return createDefaultState();
@@ -821,3 +834,4 @@ if ("serviceWorker" in navigator) {
 
 updateConnectionStatus();
 render();
+
