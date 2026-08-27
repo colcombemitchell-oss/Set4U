@@ -92,10 +92,26 @@
             <span>Performance notes</span>
             <textarea id="song-notes" name="notes" rows="3" placeholder="Capo, count-in, ending, who starts…"></textarea>
           </label>
-          <label class="field field-wide">
-            <span>Lyrics or chords</span>
-            <textarea id="song-lyrics" name="lyrics" rows="9" placeholder="Add material you’re entitled to use. It stays on this device."></textarea>
-          </label>
+          <div class="field field-wide performance-sheet-field">
+            <div class="field-label-row">
+              <label for="song-performance-sheet">Performance sheet</label>
+              <label class="button button-quiet button-compact file-button sheet-upload-button">
+                Upload text
+                <input
+                  id="performance-sheet-input"
+                  type="file"
+                  accept=".txt,.md,text/plain,text/markdown"
+                >
+              </label>
+            </div>
+            <textarea
+              id="song-performance-sheet"
+              name="performanceSheet"
+              rows="9"
+              placeholder="Add chord charts, cue words or any text you want to auto-scroll on stage."
+            ></textarea>
+            <small>Private to this device. Spacing is preserved; .txt and .md uploads can be up to 1 MB.</small>
+          </div>
         </div>
 
         <div class="dialog-actions split-actions">
@@ -177,7 +193,7 @@
         <p>Restore Mitch’s original Set 1, Set 2 and repertoire.</p>
         <button id="reset-button" class="button button-danger" type="button">Reset to original sets</button>
       </section>
-      <p class="version-label">Set4U version 1.0</p>
+      <p class="version-label">Set4U version 1.1</p>
     </dialog>
 
     <dialog id="install-dialog" class="dialog dialog-small">

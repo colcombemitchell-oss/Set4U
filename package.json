@@ -1,0 +1,11 @@
+{
+  "name": "set4u",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "An offline-first setlist manager for live musicians.",
+  "scripts": {
+    "test": "node --test",
+    "check": "node --check app.js && node --check model.js && node --check data.js && node --check sw.js && node --test"
+  }
+}

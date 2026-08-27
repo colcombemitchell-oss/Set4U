@@ -5,14 +5,15 @@ Set4U is an installable, offline-first setlist manager made for live performance
 ## What it does
 
 - Build, rename, duplicate and reorder setlists
-- Keep artist, key, BPM, performance notes and your own lyrics or chords against each song
+- Keep artist, key, BPM, performance notes and a private Performance Sheet against each song
+- Upload `.txt` or `.md` sheets and auto-scroll them at a saved per-song speed in Live Mode
 - Run a distraction-free Live Mode with previous and next controls
 - Work offline once it has been opened
 - Install to an Android, iPhone, tablet or computer home screen
 - Export and import a JSON backup
 - Store everything locally on the device, with no account required
 
-No copyrighted lyrics are bundled with the app. The lyrics and chords field is there for material the performer is entitled to use.
+No copyrighted text is bundled with the app. Performance Sheets stay on the device unless the performer deliberately includes them in a backup.
 
 ## Run locally
 

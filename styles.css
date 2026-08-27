@@ -821,6 +821,30 @@ svg {
   line-height: 1.5;
 }
 
+.performance-sheet-field > small {
+  color: var(--ink-soft);
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+.field-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.field-label-row > label:first-child {
+  font-size: 0.79rem;
+  font-weight: 800;
+}
+
+.sheet-upload-button {
+  min-height: 34px;
+  padding: 0 12px;
+  font-size: 0.76rem;
+}
+
 .dialog-actions {
   display: flex;
   justify-content: flex-end;
@@ -1017,6 +1041,10 @@ svg {
   background: rgb(255 255 255 / 0.06);
 }
 
+.live-content > .live-reference {
+  margin-top: 30px;
+}
+
 .live-reference h3 {
   margin: 0 0 10px;
   color: #a99df0;
@@ -1037,6 +1065,82 @@ svg {
 
 .live-reference .muted-copy {
   color: #908ba4;
+}
+
+.live-performance-sheet {
+  margin-top: 24px;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 18px;
+  background: rgb(255 255 255 / 0.07);
+}
+
+.live-sheet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgb(255 255 255 / 0.1);
+}
+
+.live-sheet-header h3 {
+  margin: 0 0 4px;
+  color: #a99df0;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.live-sheet-header small {
+  color: #9993aa;
+  font-size: 0.7rem;
+}
+
+.live-sheet-controls,
+.live-speed-control {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.live-speed-control {
+  color: #c9c3dc;
+  font-size: 0.72rem;
+  font-weight: 750;
+}
+
+.live-speed-control input {
+  width: clamp(82px, 12vw, 150px);
+  accent-color: #a992ff;
+}
+
+.live-speed-control output {
+  min-width: 50px;
+  color: #a9a2ba;
+  font-size: 0.68rem;
+}
+
+.live-scroll-button {
+  min-height: 38px;
+  padding: 0 13px;
+  color: white;
+  border-color: rgb(255 255 255 / 0.18);
+  background: var(--primary);
+  white-space: nowrap;
+}
+
+.live-sheet-content {
+  max-height: 44vh;
+  margin: 0;
+  overflow: auto;
+  padding: clamp(18px, 3vw, 28px);
+  color: #f7f4ff;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: calc(clamp(1rem, 2vw, 1.35rem) * var(--live-scale, 1));
+  line-height: 1.75;
+  tab-size: 4;
+  white-space: pre-wrap;
 }
 
 .live-controls {
@@ -1307,6 +1411,28 @@ svg {
 
   .live-reference-grid {
     margin-top: 22px;
+  }
+
+  .live-sheet-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .live-sheet-controls {
+    justify-content: space-between;
+  }
+
+  .live-speed-control {
+    flex: 1;
+  }
+
+  .live-speed-control input {
+    flex: 1;
+  }
+
+  .live-sheet-content {
+    max-height: 48vh;
+    padding: 17px;
   }
 
   .live-control {
