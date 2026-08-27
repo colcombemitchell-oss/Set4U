@@ -1,6 +1,6 @@
-import { DEFAULT_SETS, DEFAULT_SONGS } from "./data.js";
+import { DEFAULT_SETS, DEFAULT_SONGS } from "./data.js?v=4";
 
-export const SCHEMA_VERSION = 2;
+export const SCHEMA_VERSION = 4;
 
 const DEFAULT_SHEET_SCROLL_SPEED = 28;
 
@@ -43,6 +43,41 @@ export function createDefaultState(now = new Date().toISOString()) {
     songs: DEFAULT_SONGS.map(prepareSong),
     sets: copy(DEFAULT_SETS),
     activeSetId: DEFAULT_SETS[0].id,
+    updatedAt: now
+  };
+}
+
+export function migrateBundledSetlists(state, now = new Date().toISOString()) {
+  const bundledSongs = new Map(DEFAULT_SONGS.map((song) => [song.id, song]));
+  const seenSongIds = new Set();
+  const songs = state.songs.map((song) => {
+    seenSongIds.add(song.id);
+    const bundled = bundledSongs.get(song.id);
+    return prepareSong(
+      bundled
+        ? { ...song, title: bundled.title, artist: bundled.artist }
+        : song
+    );
+  });
+
+  DEFAULT_SONGS.forEach((song) => {
+    if (!seenSongIds.has(song.id)) songs.push(prepareSong(song));
+  });
+
+  const bundledSetIds = new Set(DEFAULT_SETS.map((set) => set.id));
+  const customSets = state.sets
+    .filter((set) => !bundledSetIds.has(set.id))
+    .map((set) => ({ ...set, songIds: [...set.songIds] }));
+  const sets = [...copy(DEFAULT_SETS), ...customSets];
+
+  return {
+    ...state,
+    version: SCHEMA_VERSION,
+    songs,
+    sets,
+    activeSetId: sets.some((set) => set.id === state.activeSetId)
+      ? state.activeSetId
+      : DEFAULT_SETS[0].id,
     updatedAt: now
   };
 }
@@ -213,3 +248,4 @@ export function moveSongInSet(state, setId, fromIndex, toIndex) {
     sets: state.sets.map((set) => (set.id === setId ? { ...set, songIds } : set))
   });
 }
+
