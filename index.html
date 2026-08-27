@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="theme-color" content="#6c4cf5">
+    <meta name="theme-color" content="#140d20">
     <meta name="description" content="Build setlists, keep performance notes and run the show offline with Set4U.">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -11,8 +11,8 @@
     <title>Set4U – Setlist Manager</title>
     <link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
-    <link rel="manifest" href="./manifest.webmanifest">
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="manifest" href="./manifest.webmanifest?v=4">
+    <link rel="stylesheet" href="./styles.css?v=4">
   </head>
   <body>
     <a class="skip-link" href="#app">Skip to the app</a>
@@ -31,9 +31,9 @@
           <span class="status-dot"></span>
           <span>Online</span>
         </span>
-        <button id="install-button" class="button button-quiet button-compact" type="button">
+        <button id="install-button" class="button button-quiet button-compact" type="button" aria-label="Install Set4U">
           <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 17v3h14v-3"/></svg>
-          Install
+          <span>Install</span>
         </button>
         <button id="settings-button" class="icon-button" type="button" aria-label="Backup and settings">
           <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm8 4a7.9 7.9 0 0 0-.1-1.2l2-1.6-2-3.4-2.5 1a8 8 0 0 0-2.1-1.2L15 3h-4l-.4 2.6a8 8 0 0 0-2.1 1.2l-2.5-1-2 3.4 2 1.6A8 8 0 0 0 6 12c0 .4 0 .8.1 1.2l-2 1.6 2 3.4 2.5-1a8 8 0 0 0 2.1 1.2L11 21h4l.4-2.6a8 8 0 0 0 2.1-1.2l2.5 1 2-3.4-2-1.6c.1-.4.1-.8.1-1.2Z"/></svg>
@@ -222,6 +222,7 @@
       <div class="noscript-message">Set4U needs JavaScript enabled to manage your setlists.</div>
     </noscript>
 
-    <script type="module" src="./app.js"></script>
+    <script type="module" src="./app.js?v=4"></script>
   </body>
 </html>
+
