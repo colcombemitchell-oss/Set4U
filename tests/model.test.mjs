@@ -9,6 +9,7 @@ import {
   deleteSet,
   deleteSong,
   duplicateSet,
+  migrateBundledSetlists,
   moveSongInSet,
   normalizeState,
   removeSongFromSet,
@@ -16,55 +17,113 @@ import {
   updateSong
 } from "../model.js";
 
-test("the original Set4U setlists contain the agreed 17 songs in order", () => {
+test("the bundled wedding setlists and spares contain the agreed songs in order", () => {
   const state = createDefaultState("2026-08-10T00:00:00.000Z");
   const titles = new Map(state.songs.map((song) => [song.id, song.title]));
 
-  assert.equal(state.sets.length, 2);
+  assert.equal(state.sets.length, 3);
   assert.deepEqual(
     state.sets[0].songIds.map((id) => titles.get(id)),
     [
-      "Stand By Me",
-      "Viva La Vida",
-      "Dreams",
-      "Saturday Night",
-      "Valerie",
+      "Those Eyes – First Dance",
+      "Morning Glory",
       "Will We Talk?",
-      "Still The One",
-      "Man I Need",
-      "She Will Be Loved",
-      "Dancing Queen",
-      "Love Story",
+      "Stand by Me",
+      "Dreams",
+      "She Will Be Loved (TBC)",
+      "Valerie",
+      "Still the One (TBC)",
+      "Silver Lining",
+      "The Way You Make Me Feel",
+      "Dancing in the Dark",
       "Can’t Take My Eyes Off You",
       "Sit Down",
-      "The Way You Make Me Feel",
-      "Believe",
-      "Bet You Look Good On The Dancefloor",
-      "Sex On Fire"
+      "Sweet Home Alabama",
+      "Man I Need",
+      "All I Have",
+      "What Makes You Beautiful"
     ]
   );
   assert.deepEqual(
     state.sets[1].songIds.map((id) => titles.get(id)),
     [
-      "Morning Glory",
-      "Dancing In The Moonlight",
-      "17 Going Under",
+      "Dancing in the Moonlight",
+      "Dancing Queen",
+      "Seventeen Going Under",
       "Teenage Dirtbag",
       "Dakota",
-      "Summer Of 69",
-      "Dancing In The Dark",
-      "Shut Up And Dance",
+      "Summer of ’69",
+      "All the Small Things",
+      "Shut Up and Dance",
+      "I Bet You Look Good on the Dancefloor",
+      "5 Colours in Her Hair",
       "Pink Pony Club",
-      "Yellow",
-      "All The Small Things",
-      "Angels",
-      "Simply The Best",
+      "Believe",
+      "Simply the Best",
+      "500 Miles",
       "Year 3000",
-      "Don’t Look Back In Anger",
       "Mr Brightside",
-      "Country Roads"
+      "Don’t Look Back in Anger",
+      "Sweet Caroline"
     ]
   );
+  assert.deepEqual(
+    state.sets[2].songIds.map((id) => titles.get(id)),
+    [
+      "Use Somebody",
+      "Brown Eyed Girl",
+      "Country Roads",
+      "Save Tonight",
+      "Viva La Vida"
+    ]
+  );
+});
+
+test("the bundled-set migration updates old installs without losing private song data or custom sets", () => {
+  const oldState = {
+    version: 2,
+    songs: [
+      {
+        id: "stand-by-me",
+        title: "Stand By Me",
+        artist: "Ben E. King",
+        key: "G",
+        bpm: 120,
+        notes: "Wedding cue",
+        performanceSheet: "G   Em\nPrivate sheet",
+        sheetScrollSpeed: 40
+      },
+      {
+        id: "custom-song",
+        title: "Custom Song",
+        artist: "",
+        key: "",
+        bpm: null,
+        notes: "",
+        performanceSheet: "",
+        sheetScrollSpeed: 28
+      }
+    ],
+    sets: [
+      { id: "set-1", name: "Old Set 1", songIds: ["stand-by-me"] },
+      { id: "custom-set", name: "My Custom Set", songIds: ["custom-song"] }
+    ],
+    activeSetId: "custom-set",
+    updatedAt: "2026-08-10T00:00:00.000Z"
+  };
+
+  const migrated = migrateBundledSetlists(oldState, "2026-08-27T00:00:00.000Z");
+  const standByMe = migrated.songs.find((song) => song.id === "stand-by-me");
+
+  assert.equal(migrated.version, 4);
+  assert.deepEqual(migrated.sets.slice(0, 3).map((set) => set.name), ["Set 1", "Set 2", "Spares"]);
+  assert.ok(migrated.sets.some((set) => set.id === "custom-set"));
+  assert.equal(migrated.activeSetId, "custom-set");
+  assert.equal(standByMe.title, "Stand by Me");
+  assert.equal(standByMe.key, "G");
+  assert.equal(standByMe.notes, "Wedding cue");
+  assert.equal(standByMe.performanceSheet, "G   Em\nPrivate sheet");
+  assert.ok(migrated.songs.some((song) => song.id === "custom-song"));
 });
 
 test("songs can be added, edited, placed in a set and removed without mutating the input", () => {
@@ -175,3 +234,4 @@ test("invalid backups are rejected with a useful message", () => {
   assert.throws(() => normalizeState({}), /not a Set4U backup/i);
   assert.throws(() => addSong(createDefaultState(), { title: " " }, "blank"), /title/i);
 });
+
