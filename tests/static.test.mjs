@@ -26,23 +26,25 @@ test("all local assets linked by the page exist and use GitHub Pages-safe relati
   const html = await read("index.html");
   const refs = [...html.matchAll(/(?:href|src)="(\.\/[^"#]+)"/g)].map((match) => match[1]);
 
-  assert.ok(refs.includes("./manifest.webmanifest"));
-  assert.ok(refs.includes("./app.js"));
-  assert.ok(refs.includes("./styles.css"));
+  assert.ok(refs.includes("./manifest.webmanifest?v=4"));
+  assert.ok(refs.includes("./app.js?v=4"));
+  assert.ok(refs.includes("./styles.css?v=4"));
   assert.equal(/(?:href|src)="\//.test(html), false);
 
-  await Promise.all(refs.map((ref) => access(resolve(root, ref.replace(/^\.\//, "")))));
+  await Promise.all(
+    refs.map((ref) => access(resolve(root, ref.replace(/^\.\//, "").split("?")[0])))
+  );
 });
 
 test("the service worker pre-caches the complete offline app shell", async () => {
   const worker = await read("sw.js");
   const required = [
     "./index.html",
-    "./styles.css",
-    "./app.js",
-    "./model.js",
-    "./data.js",
-    "./manifest.webmanifest",
+    "./styles.css?v=4",
+    "./app.js?v=4",
+    "./model.js?v=4",
+    "./data.js?v=4",
+    "./manifest.webmanifest?v=4",
     "./icons/icon.svg",
     "./icons/icon-192.png",
     "./icons/icon-512.png",
@@ -76,3 +78,14 @@ test("the private Performance Sheet supports text upload and adjustable auto-scr
   assert.match(app, /Pause auto-scroll/);
   assert.match(app, /sheetScrollSpeed/);
 });
+
+test("mobile header actions use matching icon controls", async () => {
+  const html = await read("index.html");
+  const css = await read("styles.css");
+
+  assert.match(html, /id="install-button"[\s\S]*?<svg[\s\S]*?<span>Install<\/span>/);
+  assert.match(html, /id="settings-button"[\s\S]*?<svg/);
+  assert.match(css, /#install-button span[\s\S]*?display: none/);
+  assert.match(css, /#install-button\s*\{[\s\S]*?width: 42px/);
+});
+
