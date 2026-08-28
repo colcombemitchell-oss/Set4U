@@ -196,7 +196,7 @@ function renderSetlists() {
   const newSetButton = button("＋ New set", "button button-primary", () => openSetDialog());
   app.append(
     pageHeading(
-      "Ready for the next gig",
+      "Ready for your next gig",
       "Your setlists",
       "Keep every song in order, then switch to Live Mode when you’re on stage.",
       newSetButton
@@ -773,9 +773,9 @@ document.querySelector("#import-input").addEventListener("change", (event) => {
   event.target.value = "";
 });
 document.querySelector("#reset-button").addEventListener("click", () => {
-  if (confirm("Reset Set4U to the original two sets? This replaces changes stored on this device.")) {
+  if (confirm("Reset Set4U to the starter sets? This replaces changes stored on this device.")) {
     settingsDialog.close();
-    save(createDefaultState(), "Original sets restored");
+    save(createDefaultState(), "Starter sets restored");
   }
 });
 
