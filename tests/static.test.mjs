@@ -89,3 +89,13 @@ test("mobile header actions use matching icon controls", async () => {
   assert.match(css, /#install-button\s*\{[\s\S]*?width: 42px/);
 });
 
+test("public-facing copy presents Set4U as a personal app for any user", async () => {
+  const html = await read("index.html");
+  const app = await read("app.js");
+
+  assert.match(html, /Your set\. Your show\./);
+  assert.match(html, /ready-made Set 1, Set 2 and Spares examples/);
+  assert.match(app, /Ready for your next gig/);
+  assert.doesNotMatch(`${html}\n${app}`, /Mitch|original two sets/i);
+});
+
