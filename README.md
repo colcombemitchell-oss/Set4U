@@ -1,6 +1,6 @@
 # Set4U
 
-Set4U is an installable, offline-first setlist manager made for live performance. It includes Mitch’s current wedding running order, a dedicated spares list and a wider repertoire ready to organise.
+Set4U is an installable, offline-first setlist manager made for live performance. It comes with ready-made wedding sets and spares that any musician or band can edit, replace or use as a starting point for their own show.
 
 ## What it does
 
@@ -12,6 +12,8 @@ Set4U is an installable, offline-first setlist manager made for live performance
 - Install to an Android, iPhone, tablet or computer home screen
 - Export and import a JSON backup
 - Store everything locally on the device, with no account required
+
+Every installation is independent: one user’s songs, running orders and private Performance Sheets are never shown to another user.
 
 No copyrighted text is bundled with the app. Performance Sheets stay on the device unless the performer deliberately includes them in a backup.
 
