@@ -1,6 +1,6 @@
 {
   "name": "set4u",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "private": true,
   "type": "module",
   "description": "An offline-first setlist manager for live musicians.",

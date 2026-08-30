@@ -43,3 +43,8 @@ The workflow follows GitHub’s official Pages artifact deployment pattern. GitH
 
 The custom `Set4U.co.uk` address can be attached later once its DNS records are ready; a `CNAME` file is deliberately not included yet so it cannot interrupt the working GitHub Pages address.
 
+## Android and Google Play preparation
+
+The `android/` directory contains the API 36 Trusted Web Activity project. See `android/README.md` for build, signing and origin-verification instructions. `store/listing.md` contains the draft store copy. Preparation is not a Play Store launch: account registration, release signing/build verification, origin association, policy declarations and Android device testing must all be complete before submission.
+
+The Pages workflow stages only public web assets. Android projects, test artifacts, keys, passwords and store-preparation documents are not included in the hosted website. `privacy.html` explains local storage, hosting, backup sharing and deletion.

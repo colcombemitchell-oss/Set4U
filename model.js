@@ -1,4 +1,4 @@
-import { DEFAULT_SETS, DEFAULT_SONGS } from "./data.js?v=4";
+import { DEFAULT_SETS, DEFAULT_SONGS } from "./data.js?v=5";
 
 export const SCHEMA_VERSION = 4;
 
@@ -248,4 +248,3 @@ export function moveSongInSet(state, setId, fromIndex, toIndex) {
     sets: state.sets.map((set) => (set.id === setId ? { ...set, songIds } : set))
   });
 }
-

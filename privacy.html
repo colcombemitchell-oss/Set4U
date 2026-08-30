@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#140d20">
+    <meta name="description" content="How Set4U stores your setlists and performance sheets, and how to back up or delete them.">
+    <title>Privacy & data storage – Set4U</title>
+    <link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
+    <style>
+      :root { color-scheme: dark; font-family: system-ui, sans-serif; background: #140d20; color: #f5f1fb; }
+      body { margin: 0; line-height: 1.7; }
+      main { max-width: 760px; margin: auto; padding: 40px 24px 72px; }
+      a { color: #c3adff; text-underline-offset: 4px; }
+      a:focus-visible { outline: 3px solid #ff6a86; outline-offset: 4px; }
+      header { padding: 30px 0; border-bottom: 1px solid #42324f; }
+      h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.12; letter-spacing: -.04em; }
+      h2 { margin-top: 34px; font-size: 1.3rem; }
+      p, li { color: #ddd4e7; }
+      .label { color: #ff9bad; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; font-size: .8rem; }
+      .date { font-size: .9rem; color: #baaac9; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <a href="./">← Back to Set4U</a>
+      <header>
+        <p class="label">Set4U · Your set. Your show.</p>
+        <h1>Privacy & data storage</h1>
+        <p>Set4U is a setlist and performance-sheet app for musicians. You do not need an account, and your song library is not uploaded to a Set4U database.</p>
+        <p class="date">Last updated: 30 August 2026 · Applies to the website and Android app.</p>
+      </header>
+      <h2>Your sets stay on your device</h2>
+      <p>Song titles, artists, keys, tempos, running orders, notes, performance sheets and scroll settings are saved in browser storage on your device. Text files you select are read locally; Set4U does not upload their contents. Set4U has no advertising, analytics or tracking SDKs and does not ask for contacts, location, microphone or camera access.</p>
+      <p>The Android app uses a Trusted Web Activity, so a compatible browser displays Set4U. The app and website can share the same stored data when opened in the same browser profile. Different devices and browser profiles have their own data. There is no automatic cloud sync.</p>
+      <h2>Backups and sharing</h2>
+      <p><strong>Export backup</strong> creates a JSON file containing your library, sets, notes and performance sheets. Treat it as private. Only share it with people you intend to give that content to, and only include text you have permission to share. Importing a backup replaces the current library after confirmation.</p>
+      <p>Set4U does not send backups to the developer. If you choose to send one using another app or service, that service handles the transfer under its own terms.</p>
+      <h2>Website hosting and network requests</h2>
+      <p>Set4U is hosted on GitHub Pages. Opening the app online downloads its code, icons and updates over HTTPS. Like other web hosts, GitHub receives technical request information, including your IP address, and may retain security and service logs. This does not include the contents of your locally saved setlists or uploaded text files.</p>
+      <p>See <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub's privacy statement</a>. Your browser, Android and Google Play may process their own service or diagnostic data under their respective policies. Set4U does not control those services.</p>
+      <h2>Retention and deletion</h2>
+      <p>Your edits remain in local browser storage until you delete or replace them, clear site data, or the browser or operating system removes that storage. Set4U does not maintain a server copy and cannot recover a lost library.</p>
+      <p>Delete individual songs or sets in the app, or use <strong>Backup & settings → Reset to starter sets</strong> to replace your custom library with the bundled examples. To remove all stored Set4U data, clear site data for <strong>colcombemitchell-oss.github.io</strong> in the browser that opens the app. This may also clear data for other apps on that same GitHub Pages origin.</p>
+      <p>Because the Android app uses browser storage, an uninstall alone may leave the website's data behind. Delete exported backup files separately wherever you saved or shared them. Export anything you need before clearing storage.</p>
+      <h2>Offline use</h2>
+      <p>After a successful first online load, Set4U caches its interface for offline use. Keep a separate backup before a performance: clearing browser data or storage eviction can remove offline files and saved sets.</p>
+      <h2>Contact and updates</h2>
+      <p>Set4U is maintained through the <a href="https://github.com/colcombemitchell-oss/Set4U">Set4U project</a>. For support or privacy questions, use <a href="https://github.com/colcombemitchell-oss/Set4U/issues">the project issue tracker</a>. Issues are public: do not include private performance sheets, backup files or sensitive personal information. Android users can also use the developer contact listed on Google Play once the app is published.</p>
+      <p>This page will be updated if Set4U's data handling changes. The date above identifies the current version.</p>
+    </main>
+  </body>
+</html>

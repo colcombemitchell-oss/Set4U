@@ -1,0 +1,13 @@
+node_modules/
+site-dist/
+private/
+**/*.keystore
+**/*.jks
+**/*.p12
+**/*.aab
+**/*.apk
+**/*password*
+**/local.properties
+**/.gradle/
+**/build/
+**/service-account*.json

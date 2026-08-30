@@ -1,12 +1,13 @@
-const CACHE_NAME = "set4u-v4";
+const CACHE_NAME = "set4u-v5";
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./styles.css?v=4",
-  "./app.js?v=4",
-  "./model.js?v=4",
-  "./data.js?v=4",
-  "./manifest.webmanifest?v=4",
+  "./privacy.html",
+  "./styles.css?v=5",
+  "./app.js?v=5",
+  "./model.js?v=5",
+  "./data.js?v=5",
+  "./manifest.webmanifest?v=5",
   "./icons/icon.svg",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
@@ -23,7 +24,7 @@ self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches
       .keys()
-      .then((keys) => Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))))
+      .then((keys) => Promise.all(keys.filter((key) => key.startsWith("set4u-v") && key !== CACHE_NAME).map((key) => caches.delete(key))))
       .then(() => self.clients.claim())
   );
 });
@@ -63,4 +64,3 @@ self.addEventListener("fetch", (event) => {
     })
   );
 });
-

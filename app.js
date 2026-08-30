@@ -14,7 +14,7 @@ import {
   selectSet,
   SCHEMA_VERSION,
   updateSong
-} from "./model.js?v=4";
+} from "./model.js?v=5";
 
 const STORAGE_KEY = "set4u-state-v1";
 
@@ -834,4 +834,3 @@ if ("serviceWorker" in navigator) {
 
 updateConnectionStatus();
 render();
-
