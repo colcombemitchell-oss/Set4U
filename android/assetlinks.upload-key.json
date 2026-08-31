@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "io.github.colcombemitchelloss.set4u",
+      "sha256_cert_fingerprints": [
+        "6C:3E:37:D0:E6:F2:8E:73:CD:E4:DB:A1:1E:FB:EC:F1:02:42:13:7E:0D:C9:F6:95:F8:FF:70:80:4B:97:F0:15"
+      ]
+    }
+  }
+]
